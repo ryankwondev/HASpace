@@ -1,7 +1,6 @@
 FROM --platform=$BUILDPLATFORM node:lts as npm
 
-RUN mkdir -p /usr/src/build && \
-    /usr/src/build
+RUN mkdir -p /usr/src/build 
 WORKDIR /usr/src/build
 
 ARG NODE_ENV
@@ -16,8 +15,7 @@ FROM node:lts as rebuild
 ARG BUILDPLATFORM
 ARG TARGETPLATFORM
 
-RUN mkdir -p /usr/src/build && \
-    /usr/src/build
+RUN mkdir -p /usr/src/build
 
 COPY --from=npm /usr/src/build /usr/src/build
 
@@ -32,8 +30,7 @@ ENV NODE_ENV=$NODE_ENV \
     daemon=false \
     silent=false
 
-RUN mkdir -p /usr/src/app && \
-    /usr/src/app
+RUN mkdir -p /usr/src/app
 
 COPY --from=rebuild /usr/src/build /usr/src/app
 
